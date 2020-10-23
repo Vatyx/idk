@@ -12,7 +12,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  runs-on: ubuntu-20.04
+  runs-on: 'ubuntu-20.04'
   build-frontend:
     steps:
     - uses: actions/checkout@v2
