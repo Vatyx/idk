@@ -1,0 +1,25 @@
+name: Rust Frontend
+
+on:
+  push:
+    paths: 
+     - 'frontend/**'
+  pull_request:
+    paths: 
+     - 'frontend/**'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  runs-on: 'ubuntu-20.04'
+  build-frontend:
+    steps:
+    - uses: actions/checkout@v2
+    - uses: jetli/wasm-pack-action@v0.3.0
+      with:
+        version: 'latest'
+        run: |
+          cd frontend
+          wasm-pack build --target web --out-name wasm --out-dir ./static
+          ls ./static
