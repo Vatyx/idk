@@ -19,7 +19,7 @@ jobs:
     - name: Build
       run: |
         cd cli
-        cargo build --verbose
+        cargo build --verbose --release
     - name: Run tests
       run: |
         cd cli
