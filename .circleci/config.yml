@@ -7,4 +7,6 @@ jobs:
       - image: cimg/rust:1.47.0
     steps:
       - checkout
-      - run: cargo --version
+      - run: |
+          cd ./cli
+          cargo build
