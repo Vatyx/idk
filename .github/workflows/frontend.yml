@@ -19,6 +19,7 @@ jobs:
     - uses: jetli/wasm-pack-action@v0.3.0
       with:
         version: 'latest'
+    - name: Build it
       run: |
         cd frontend
         wasm-pack build --target web --out-name wasm --out-dir ./static
