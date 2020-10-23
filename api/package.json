@@ -7,7 +7,9 @@
     "start": "node src/app.js",
     "start:dev": "nodemon src/app.js",
     "start:debug": "nodemon --inspect src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:build": "docker build . --tag gcr.io/idk-293422/api:$npm_package_version",
+    "docker:push": "docker push gcr.io/idk-293422/api:$npm_package_version"
   },
   "engines": {
     "node": ">=12.6"
@@ -15,6 +17,7 @@
   "author": "",
   "dependencies": {
     "@hapi/boom": "^9.1.0",
+    "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1"
   },
