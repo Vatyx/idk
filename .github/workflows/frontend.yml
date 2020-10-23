@@ -12,8 +12,8 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  runs-on: 'ubuntu-20.04'
   build-frontend:
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - uses: jetli/wasm-pack-action@v0.3.0
