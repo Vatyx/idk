@@ -22,5 +22,6 @@ jobs:
     - name: Build it
       run: |
         cd frontend
+        ls ./static
         wasm-pack build --target web --out-name wasm --out-dir ./static
         ls ./static
