@@ -1,16 +1,11 @@
-require('dotenv').config();
+const axios = require('axios').default;
 
-export default gpt3 = async (prompt, max_tokens, temperature, top_p = 1, n, logprobs, stop, frequency_penalty = 0, presence_penalty = 0, engine = 'davinci-msft') => {
-  const gpt3Response = await axios.post(`https://api.openai.com/v1/engines/${engine}/completions`, {
+const gpt3 = async (prompt, maxTokens, temperature, stop) => {
+  const gpt3Response = await axios.post(`https://api.openai.com/v1/engines/davinci-msft/completions`, {
     prompt,
-    max_tokens,
+    max_tokens: maxTokens,
     temperature,
-    top_p,
-    n,
-    logprobs,
     stop,
-    frequency_penalty,
-    presence_penalty
   },
     {
       headers: {
@@ -19,6 +14,9 @@ export default gpt3 = async (prompt, max_tokens, temperature, top_p = 1, n, logp
       }
     });
 
-  console.log(gpt3.data);
-  return gpt3Response.data;
+  return gpt3Response.data.choices[0].text;
+}
+
+module.exports = {
+  gpt3
 }
