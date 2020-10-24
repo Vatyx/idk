@@ -8,7 +8,7 @@
 		.then(function (idToken) {
 			const urlParams = new URLSearchParams(window.location.search);
 			if (urlParams.get('ref') === "cli") {
-				return fetch(`http://localhost:8765/auth?token=${idToken}`, {
+				fetch(`http://localhost:8765/auth?token=${idToken}`, {
 					method: "get",
 				})
 			};
