@@ -1,7 +1,8 @@
+use clap::{App, Arg};
+use clipboard::ClipboardProvider;
+use clipboard::ClipboardContext;
 
 mod idkrequest;
-
-use clap::{App, Arg};
 
 fn main() {
     let matches = App::new("idk cli")
@@ -14,5 +15,19 @@ fn main() {
                             .about("Log into idk"))
                         .get_matches();
 
-    println!("{}", idkrequest::make_request(matches.value_of("INPUT").unwrap()));
+    let input = matches.value_of("INPUT").unwrap();
+
+    let command = match idkrequest::make_request(input) {
+        Ok(cmd) => cmd,
+        Err(error) => panic!("{:?}", error),
+    };
+
+    println!("{}", command);
+
+    let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
+
+    match ctx.set_contents(command) {
+        Err(error) => println!("{:?}", error),
+        _ => (),
+    };
 }
