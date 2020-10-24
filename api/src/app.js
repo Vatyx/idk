@@ -6,7 +6,8 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.get("/", async (req, res) => {
-    res.status(200).json({});
+    const input = req.query.q;
+    res.status(200).send(input);
 });
 
 app.listen(port, () => {
