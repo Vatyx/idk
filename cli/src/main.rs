@@ -9,15 +9,20 @@ fn main() {
                         .version("1.0")
                         .about("Generate commands you don't know.")
                         .arg(Arg::with_name("INPUT")
-                            .required(true)
-                            .index(1))
+                            .multiple(true))
                         .subcommand(App::new("login")
                             .about("Log into idk"))
                         .get_matches();
 
-    let input = matches.value_of("INPUT").unwrap();
+    if matches.is_present("login") {
+        println!("You're trying to log in");
+        return;
+    }
 
-    let command = match idkrequest::make_request(input) {
+    let inputs: Vec<_> = matches.values_of("INPUT").unwrap().collect();
+    let input = inputs.join(" ");
+
+    let command = match idkrequest::make_request(&input) {
         Ok(cmd) => cmd,
         Err(error) => panic!("{:?}", error),
     };
