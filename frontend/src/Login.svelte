@@ -15,7 +15,9 @@
 	var provider = new firebase.auth.GoogleAuthProvider();
 	var user = firebase.auth().currentUser;
 	let loggedIn: boolean = false;
+	let loggedInLoading: boolean = true;
 	firebase.auth().onAuthStateChanged(function (user) {
+		loggedInLoading = false;
 		if (user) {
 			loggedIn = true;
 		}
@@ -24,17 +26,54 @@
 		firebase.auth().signInWithRedirect(provider);
 	};
 	const logout = () => {
-		firebase.auth().signOut().then(() => window.location.reload());
+		firebase
+			.auth()
+			.signOut()
+			.then(() => window.location.reload());
 	};
 </script>
 
 <main>
-	{#if loggedIn}
-	Congrats buddy, you are logged in.
-	<button on:click={logout}> logout </button>
-	{/if}
-	{#if !loggedIn}
-	Bruh, you should login.
-	<button on:click={login}> login </button>
+	{#if loggedInLoading}
+			<div class="window" style="margin: 32px; width: 250px">
+				<div class="title-bar">
+					<div class="title-bar-text">Loading Screen</div>
+
+					<div class="title-bar-controls">
+						<button aria-label="Minimize" />
+						<button aria-label="Maximize" />
+						<button aria-label="Close" />
+					</div>
+				</div>
+				<div class="window-body">
+					<p>Your account is loading.</p>
+				</div>
+			</div>
+	{:else}
+		{#if loggedIn}
+			Congrats buddy, you are logged in.
+			<button on:click={logout}> logout </button>
+		{/if}
+		{#if !loggedIn}
+			<div class="window" style="margin: 32px; width: 250px">
+				<div class="title-bar">
+					<div class="title-bar-text">Login Screen</div>
+
+					<div class="title-bar-controls">
+						<button aria-label="Minimize" />
+						<button aria-label="Maximize" />
+						<button aria-label="Close" />
+					</div>
+				</div>
+				<div class="window-body">
+					<p>Would you like to login?</p>
+					<section
+						class="field-row"
+						style="justify-content: flex-end">
+						<button on:click={login}>Login</button>
+					</section>
+				</div>
+			</div>
+		{/if}
 	{/if}
 </main>
