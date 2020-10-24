@@ -26,7 +26,7 @@ jobs:
       run: |
         cd cli
         cargo build --verbose --release
-        zip --junk-paths idk ./cli/target/release/idk
+        zip idk ./cli/target/release/idk
     - name: Run tests
       run: |
         cd cli
