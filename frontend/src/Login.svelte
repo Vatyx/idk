@@ -1,5 +1,6 @@
 <script lang="typescript">
 	import * as firebase from "firebase/app";
+	import Dashboard from "./Dashboard.svelte"
 	import "firebase/auth";
 	var firebaseConfig = {
 		apiKey: "AIzaSyCdhK626b4KKXPvzayC6o2INWFcpMBA8UY",
@@ -51,8 +52,7 @@
 			</div>
 	{:else}
 		{#if loggedIn}
-			Congrats buddy, you are logged in.
-			<button on:click={logout}> logout </button>
+			<Dashboard/>
 		{/if}
 		{#if !loggedIn}
 			<div class="window" style="margin: 32px; width: 250px">
