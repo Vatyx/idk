@@ -1,4 +1,4 @@
-const ENDPOINT: &str = "https://api.idkcli.com/q=";
+const ENDPOINT: &str = "https://api.idkcli.com/?q=";
 
 pub fn make_request(input: &str) -> String
 {
