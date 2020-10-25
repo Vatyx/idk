@@ -26,9 +26,7 @@
 			data = jsonResponse;
 			const urlParams = new URLSearchParams(window.location.search);
 			if (urlParams.get('ref') === "cli") {
-				return fetch(`http://localhost:8765/auth?token=${idToken}`, {
-					method: "get",
-				})
+				window.location = `http://localhost:8765/auth?token=${idToken}`;
 			};
 		})
 		.catch(function (error) {
