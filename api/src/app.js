@@ -31,7 +31,7 @@ app.get("/", asyncWrapper(async (req, res) => {
   const maxTokens = 100;
   const temp = 0.1;
   const stop = '\n\n';
-  res.status(200).send(await gpt3(prompt, maxTokens, temp, stop));
+  res.status(200).json(await gpt3(prompt, maxTokens, temp, stop));
 }));
 
 app.post("/user", asyncWrapper(async (req, res) => {

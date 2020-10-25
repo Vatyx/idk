@@ -14,11 +14,7 @@ const gpt3 = async (prompt, maxTokens, temperature, stop) => {
       }
     });
 
-  const raw = gpt3Response.data.choices[0].text.trim();
-  if (raw.includes("Command: ")) {
-    return raw.split("Command: ")[0];
-  }
-  return raw;
+  return gpt3Response.data.choices[0].text.trim().split("Command: ");
 }
 
 module.exports = {
