@@ -14,7 +14,7 @@ pub async fn start_server() -> String {
     let routes = warp::any().and(warp::path::param()).and(with_signal).and(with_data).and_then(move |name: String, tx: mpsc::Sender<String>, dx: mpsc::Sender<String>| async move { 
         tx.clone().send("".to_string()).await.ok();
         dx.clone().send(name).await.ok();
-        Ok::<_, warp::reject::Rejection>("Done")
+        Ok::<_, warp::reject::Rejection>("<html><script>window.location=\"https://app.idkcli.com\"<\\script><\\html>")
     }).with(cors);
     
         // dataSender.send(name);
