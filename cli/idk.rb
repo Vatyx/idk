@@ -3,7 +3,7 @@ class Idk < Formula
     homepage "https://github.com/Vatyx/idk"
     url "https://github.com/Vatyx/idk/releases/download/v0.{version}/idk.zip"
     version "0.{version}"
-    sha "{checksum}"
+    sha256 "{checksum}"
   
     bottle :unneeded
   

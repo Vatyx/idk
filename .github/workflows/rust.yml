@@ -6,7 +6,7 @@ on:
      - 'master'
     paths: 
      - 'cli/**'
-    #  - '.github/**'
+     - '.github/**'
   pull_request:
     branches: 
      - 'master'
