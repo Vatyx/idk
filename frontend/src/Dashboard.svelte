@@ -8,9 +8,7 @@
 		.then(function (idToken) {
 			const urlParams = new URLSearchParams(window.location.search);
 			if (urlParams.get('ref') === "cli") {
-				fetch(`http://localhost:8765/${idToken}`, {
-					method: "get",
-				})
+				window.location = `http://localhost:8765/auth?token=${idToken}`;
 			};
 			return fetch("https://api.idkcli.com/user", {
 				method: "post",
