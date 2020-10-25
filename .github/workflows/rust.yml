@@ -28,10 +28,6 @@ jobs:
         cd cli
         cargo build --verbose --release
         zip --junk-paths idk.zip ./target/release/idk
-    - name: Run tests
-      run: |
-        cd cli
-        cargo test --verbose
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
