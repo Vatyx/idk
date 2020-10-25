@@ -28,9 +28,9 @@ app.get("/", asyncWrapper(async (req, res) => {
 
   const prompt = `${await getPrompt()}\n\nText: ${input}\nCommand:`;
   console.log(`Prompt is: ${prompt}`);
-  const maxTokens = 100;
-  const temp = 0.1;
-  const stop = '\n\n';
+  const maxTokens = process.env.MAX_TOKENS || 100;
+  const temp = process.env.TEMP || 0.1;
+  const stop = process.env.STOP || '\n\n';
   res.status(200).json(
     {
       statusCode: 200,
