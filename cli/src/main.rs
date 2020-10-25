@@ -28,15 +28,22 @@ fn save_config(config: &String) {
 }
 
 fn make_backend_request(input: &String, access_token: &String) {
-    let command = match idkrequest::make_request(&input, access_token) {
+    let commands = match idkrequest::make_request(&input, access_token) {
         Ok(cmd) => cmd,
-        Err(error) => panic!("{:?}", error),
+        Err(error) => {
+            println!("{:?}", error);
+            vec!("API Error!".to_string())
+        },
     };
 
-    println!("{}", command);
+    for cmd in commands.iter() {
+        print!("{}", cmd);
+    }
 
-    let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
-    ctx.set_contents(command).unwrap();
+    if let Some(first) = commands.get(1) {
+        let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
+        ctx.set_contents(first.clone()).unwrap();
+    }
 }
 
 fn do_login() -> String {
@@ -52,7 +59,6 @@ fn do_login() -> String {
     println!("Successfully logged in! Try asking for a command.");
 
     return token;
-
 }
 
 fn main() {
