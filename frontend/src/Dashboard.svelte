@@ -2,12 +2,14 @@
 	import * as firebase from "firebase/app";
 	var user = firebase.auth().currentUser;
 	let data: any | undefined = undefined;
-	let idToken: string;
 	firebase
 		.auth()
 		.currentUser.getIdToken(/* forceRefresh */ true)
 		.then(function (idToken) {
-			idToken = idToken;
+			const urlParams = new URLSearchParams(window.location.search);
+			if (urlParams.get('ref') === "cli") {
+				window.location = `http://localhost:8765/auth?token=${idToken}`;
+			};
 			return fetch("https://api.idkcli.com/user", {
 				method: "post",
 				headers: {
@@ -24,10 +26,6 @@
 		.then((response) => response.json())
 		.then((jsonResponse) => {
 			data = jsonResponse;
-			const urlParams = new URLSearchParams(window.location.search);
-			if (urlParams.get('ref') === "cli") {
-				window.location = `http://localhost:8765/auth?token=${idToken}`;
-			};
 		})
 		.catch(function (error) {
 			console.error('woops: ', error)
