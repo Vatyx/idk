@@ -3,7 +3,7 @@ use tokio::sync::mpsc;
 
 pub async fn start_server() -> String {
 
-    // let (tx, mut rx) = watch::channel::<String>("".to_string());
+    let cors = warp::cors().allow_any_origin();
 
     let (signal_sender, mut signal_receiver) = mpsc::channel::<String>(1);
     let (data_sender, mut data_receiver) = mpsc::channel::<String>(1);
@@ -15,7 +15,7 @@ pub async fn start_server() -> String {
         tx.clone().send("".to_string()).await.ok();
         dx.clone().send(name).await.ok();
         Ok::<_, warp::reject::Rejection>("Done")
-    });
+    }).with(cors);
     
         // dataSender.send(name);
 
