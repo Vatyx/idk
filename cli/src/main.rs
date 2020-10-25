@@ -23,7 +23,6 @@ fn load_config() -> Result<String, Box<dyn std::error::Error + 'static>> {
 }
 
 fn save_config(config: &String) {
-    println!("{}", get_config_path().unwrap().to_string_lossy());
     let mut file = fs::File::create(get_config_path().unwrap()).unwrap();
     file.write_all(config.as_bytes()).unwrap();
 }
