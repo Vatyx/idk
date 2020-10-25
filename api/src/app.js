@@ -34,7 +34,7 @@ app.get("/", asyncWrapper(async (req, res) => {
   res.status(200).json(
     {
       statusCode: 200,
-      error: undefined,
+      error: "",
       message: "Success",
       data: await gpt3(prompt, maxTokens, temp, stop),
 
