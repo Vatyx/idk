@@ -6,7 +6,7 @@ on:
      - 'master'
     paths: 
      - 'cli/**'
-    #  - '.github/**'
+     - '.github/**'
   pull_request:
     branches: 
      - 'master'
@@ -52,12 +52,12 @@ jobs:
       run: |
         sed -i '' 's/{version}/${{ github.run_number }}/g' cli/idk.rb
         CHECKSUM=$(shasum -a 256 ./cli/idk.zip | awk '{print $1}') && sed -i '' "s/{checksum}/${CHECKSUM}/g" cli/idk.rb
-    - name: Pushes test file
-      uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+    - name: Push updated idk.rb
+      uses: Vatyx/copy_file_to_another_repo_action@master
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: 'idk.rb'
+        source_file: 'cli/idk.rb'
         destination_repo: 'Vatyx/homebrew-idk'
         destination_folder: '.'
         user_email: 'sahildhanju@improbable.io'
