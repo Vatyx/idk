@@ -52,6 +52,7 @@ fn do_login() -> String {
     println!("Successfully logged in! Try asking for a command.");
 
     return token;
+
 }
 
 fn main() {

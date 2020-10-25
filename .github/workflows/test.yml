@@ -1,26 +1,26 @@
-name: Test
+# name: Test
 
-on:
-  push:
-    branches: 
-     - 'master'
+# on:
+#   push:
+#     branches: 
+#      - 'master'
 
-jobs:
-  build:
+# jobs:
+#   build:
 
-    runs-on: macos-11.0
+#     runs-on: macos-11.0
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
 
-    - name: Pushes test file
-      uses: Vatyx/copy_file_to_another_repo_action@master
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      with:
-        source_file: 'cli/idk.rb'
-        destination_repo: 'Vatyx/homebrew-idk'
-        destination_folder: '.'
-        user_email: 'sahildhanju@improbable.io'
-        user_name: 'Vatyx'
+#     - name: Pushes test file
+#       uses: Vatyx/copy_file_to_another_repo_action@master
+#       env:
+#         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#       with:
+#         source_file: 'cli/idk.rb'
+#         destination_repo: 'Vatyx/homebrew-idk'
+#         destination_folder: '.'
+#         user_email: 'sahildhanju@improbable.io'
+#         user_name: 'Vatyx'
