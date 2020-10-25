@@ -6,7 +6,7 @@ on:
      - 'master'
     paths: 
      - 'cli/**'
-     - '.github/**'
+    #  - '.github/**'
   pull_request:
     branches: 
      - 'master'
@@ -28,10 +28,6 @@ jobs:
         cd cli
         cargo build --verbose --release
         zip --junk-paths idk.zip ./target/release/idk
-    - name: Run tests
-      run: |
-        cd cli
-        cargo test --verbose
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -52,3 +48,17 @@ jobs:
         asset_path: ./cli/idk.zip
         asset_name: idk.zip
         asset_content_type: application/zip
+    - name: Update ruby file
+      run: |
+        sed -i '' 's/{version}/${{ github.run_number }}/g' cli/idk.rb
+        CHECKSUM=$(shasum -a 256 ./cli/idk.zip | awk '{print $1}') && sed -i '' "s/{checksum}/${CHECKSUM}/g" cli/idk.rb
+    - name: Pushes test file
+      uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'idk.rb'
+        destination_repo: 'Vatyx/homebrew-idk'
+        destination_folder: '.'
+        user_email: 'sahildhanju@improbable.io'
+        user_name: 'Vatyx'
